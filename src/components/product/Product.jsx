@@ -2,7 +2,7 @@ import React from 'react';
 
 const Product = ({product}) => {
     return (
-        <a key={product.id} href={"product/" + product.id} className="group">
+        <a key={product.id} href={'#/product/' + product.id} className="group">
             <div className="border p-3 rounded">
             <div className="w-40 h-40 p-1 mx-auto">
                 <img
