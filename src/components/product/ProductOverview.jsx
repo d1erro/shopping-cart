@@ -1,6 +1,12 @@
 import {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart} from "../../state/actions";
 
 export default function ProductOverview({id}) {
+
+    const dispatch = useDispatch();
+    const cartProducts = useSelector((state) => state.cartProducts);
+
     const [product, setProduct] = useState([]);
     useEffect(() => {
         fetch('https://fakestoreapi.com/products/' + id)
@@ -8,8 +14,9 @@ export default function ProductOverview({id}) {
             .then(data=>setProduct(data))
             .catch((error) => console.error(error));
     }, [])
+
     return (
-        <main>
+        <main className="container mx-auto">
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -50,15 +57,15 @@ export default function ProductOverview({id}) {
                         <h2 className="sr-only">Product information</h2>
                         <p className="text-3xl tracking-tight text-gray-900">${product.price}</p>
 
-                        <form className="mt-10">
+                        <div className="mt-10">
                             <button
                                 type="submit"
                                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                // onClick={}
+                                onClick={() => dispatch(addToCart(product))}
                             >
                                 Add to cart
                             </button>
-                        </form>
+                        </div>
                     </div>
 
                     <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
