@@ -1,16 +1,16 @@
 import './App.css';
-import {Routes, Route, HashRouter} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import ShopPage from "./pages/ShopPage";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
-      <HashRouter>
-          <Routes>
-            <Route exact path="/" element={<ShopPage/>} />
-            <Route exact path="/product/:id" element={<ProductPage/>} />
-          </Routes>
-      </HashRouter>
+        <Routes>
+          <Route path="/shopping-cart" element={<ShopPage/>} />
+          <Route path="/shopping-cart/product/:id" element={<ProductPage/>} />
+          <Route path="/shopping-cart/cart" element={<CartPage/>} />
+        </Routes>
   );
 }
 

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart} from "../../state/actions";
+import {addToCart} from "../../state/reducers";
 
 export default function ProductOverview({id}) {
 
@@ -13,7 +13,7 @@ export default function ProductOverview({id}) {
             .then(res=>res.json())
             .then(data=>setProduct(data))
             .catch((error) => console.error(error));
-    }, [])
+    })
 
     return (
         <main className="container mx-auto">
@@ -22,9 +22,9 @@ export default function ProductOverview({id}) {
                     <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                             <li key={product.id}>
                                 <div className="flex items-center">
-                                    <a href="#" className="mr-2 text-sm font-small text-gray-400">
+                                    <p className="mr-2 text-sm font-small text-gray-400">
                                         Category: {product.category}
-                                    </a>
+                                    </p>
                                 </div>
                             </li>
                         <li className="text-sm">

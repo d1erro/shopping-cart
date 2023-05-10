@@ -1,9 +1,4 @@
-export const addToCart = (product) => ({
-    type: 'ADD_TO_CART',
-    payload: product,
-});
+import { createAction } from '@reduxjs/toolkit';
 
-export const removeFromCart = (productId) => ({
-    type: 'REMOVE_FROM_CART',
-    payload: productId,
-});
+export const addToCart = createAction('ADD_TO_CART');
+export const removeFromCart = createAction('REMOVE_FROM_CART');

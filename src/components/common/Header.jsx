@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import {Link} from "react-router-dom";
 
 const Header = () => {
-    const cartProducts = useSelector((state) => state.cartProducts);
+    const cartProducts = useSelector((state) => state.cart.cartProducts);
     const cartProductsCount = cartProducts.length;
 
     return (
         <header className="p-4 bg-gray-100">
             <div className="container mx-auto flex items-center justify-between">
-            <a href="/"><div className="text-3xl font-bebas">Online Store</div></a>
+            <Link to="/shopping-cart"><div className="text-3xl font-bebas">Online Store</div></Link>
             <div className="flex-grow mx-4">
                 <input
                     type="text"
@@ -17,7 +18,7 @@ const Header = () => {
                 />
             </div>
 
-            <div className="flex items-center">
+            <Link to="/shopping-cart/cart"><div className="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                      stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -25,11 +26,11 @@ const Header = () => {
                 <path/>
                 </svg>
                 {cartProductsCount !== 0 && (
-                    <span className="bg-red-500 text-white text-[10px] font-bold rounded-full px-[5px] py-[1px] absolute top-0 right-0 mt-4 mr-1">
+                    <span className="bg-red-500 text-white text-[10px] font-bold rounded-full px-[3px] py-[1px] mb-5">
                         {cartProductsCount}
                     </span>
                 )}
-            </div>
+            </div></Link>
             </div>
         </header>
     );
