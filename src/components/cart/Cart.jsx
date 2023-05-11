@@ -1,30 +1,32 @@
-import {useDispatch, useSelector} from "react-redux";
-import {removeFromCart} from "../../state/actions";
+import { useDispatch, useSelector } from "react-redux";
+import CartItems from "./CartItems";
+import OrderSummary from "./OrderSummary";
 
 const Cart = () => {
     const cartProducts = useSelector((state) => state.cart.cartProducts);
+    const dispatch = useDispatch();
+    const isCartEmpty = cartProducts.length === 0;
+    const showContent = () => {
+        if (!isCartEmpty) {
+            return (
+                <>
+                    <CartItems cartProducts={cartProducts} dispatch={dispatch} />
+                    <OrderSummary cartProducts={cartProducts} dispatch={dispatch} />
+                </>
+            );
+        } else {
+           return <p className="mx-auto">Cart is empty</p>
+        }
+    };
 
-        return (
-            <main className="container mx-auto">
-                <h2 className="text-3xl font-light mb-4 font-barlow p-3">Shopping Cart</h2>
-                <div>
-                    {cartProducts.map((product) => (
-                        <div key={product.id} className="mb-2">
-                            <div className="flex items-center space-x-4">
-                                <img src={product.image} alt={product.title} className="w-16 h-16 object-cover"/>
-                                <div>
-                                    <h3 className="font-bold">{product.title}</h3>
-                                    <p className="text-gray-500">{product.category}</p>
-                                    <p className="text-gray-700">Цена: ${product.price}</p>
-                                    <p className="text-gray-700">Количество: {product.quantity}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </main>
-        )
-}
-
+    return (
+        <main className="container mx-auto">
+            <h2 className="font-inter text-xl font-bold p-3 text-center">Shopping Cart</h2>
+            <div className="flex flex-wrap xl:flex-nowrap">
+                {showContent()}
+            </div>
+        </main>
+    );
+};
 
 export default Cart;

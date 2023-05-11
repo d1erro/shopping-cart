@@ -26,7 +26,7 @@ const Header = () => {
                 <path/>
                 </svg>
                 {cartProductsCount !== 0 && (
-                    <span className="bg-red-500 text-white text-[10px] font-bold rounded-full px-[3px] py-[1px] mb-5">
+                    <span className="bg-red-500 text-white text-[10px] font-bold rounded-full px-[5px] py-[1px] mb-5">
                         {cartProductsCount}
                     </span>
                 )}

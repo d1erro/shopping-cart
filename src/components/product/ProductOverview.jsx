@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addToCart} from "../../state/reducers";
 
 export default function ProductOverview({id}) {
 
     const dispatch = useDispatch();
-    const cartProducts = useSelector((state) => state.cartProducts);
 
     const [product, setProduct] = useState([]);
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function ProductOverview({id}) {
         <main className="container mx-auto">
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
-                    <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                             <li key={product.id}>
                                 <div className="flex items-center">
                                     <p className="mr-2 text-sm font-small text-gray-400">
@@ -60,7 +59,7 @@ export default function ProductOverview({id}) {
                         <div className="mt-10">
                             <button
                                 type="submit"
-                                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 onClick={() => dispatch(addToCart(product))}
                             >
                                 Add to cart

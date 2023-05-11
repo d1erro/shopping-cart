@@ -4,6 +4,7 @@ module.exports = {
     fontFamily: {
       'bebas': ['Bebas Neue'],
       'barlow': ['Barlow'],
+      'inter': ['Inter'],
     },
     extend: {},
   },

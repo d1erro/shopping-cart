@@ -9,13 +9,33 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            state.cartProducts.push(action.payload);
+            const newProduct = action.payload;
+            const existingProduct = state.cartProducts.find((product) => product.id === newProduct.id);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                state.cartProducts.push({ ...newProduct, quantity: 1 });
+            }
         },
-        removeFromCart: (state, action) => {
-            state.cartProducts = state.cartProducts.filter((item) => item.id !== action.payload);
+        removeOneFromCart: (state, action) => {
+            const productId = action.payload;
+            const product = state.cartProducts.find((product) => product.id === productId);
+
+            if (product) {
+                if (product.quantity === 1) {
+                    state.cartProducts = state.cartProducts.filter((product) => product.id !== productId);
+                } else {
+                    product.quantity -= 1;
+                }
+            }
+        },
+        removeAllFromCart: (state, action) => {
+            const removedProduct = action.payload;
+            state.cartProducts = state.cartProducts.filter((product) => product.id !== removedProduct.id);
         },
     },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeOneFromCart, removeAllFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
