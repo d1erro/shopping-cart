@@ -1,10 +1,22 @@
 import {useEffect, useState} from 'react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../state/reducers";
 
 export default function ProductOverview({id}) {
 
     const dispatch = useDispatch();
+    const products = useSelector((state) => state.cart.cartProducts);
+    let isProductInCart = false;
+
+    (function isCurrentProductInCart(){
+        if (getQuantityCurrentProduct() > 0) isProductInCart = true;
+    })();
+
+    function getQuantityCurrentProduct() {
+        // eslint-disable-next-line
+        const currentProduct = products.find((product) => product.id == id);
+        if (currentProduct) return currentProduct.quantity;
+    }
 
     const [product, setProduct] = useState([]);
     useEffect(() => {
@@ -59,10 +71,15 @@ export default function ProductOverview({id}) {
                         <div className="mt-10">
                             <button
                                 type="submit"
-                                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="flex justify-center mt-10 w-full rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 onClick={() => dispatch(addToCart(product))}
                             >
-                                Add to cart
+                                <p className="">Add to cart</p>
+                                {isProductInCart && (
+                                    <span className="ml-5 my-auto bg-red-500 text-[15px] rounded-xl px-[7px] py-[0.4px]">
+                                    {getQuantityCurrentProduct()}
+                                    </span>
+                                )}
                             </button>
                         </div>
                     </div>
