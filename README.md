@@ -2,7 +2,7 @@
 
 Mini online store on React.
 
-[Live Demo](https://github.com/d1erro/shopping-cart) :point_left:
+[Live Demo](https://d1erro.github.io/shopping-cart/) :point_left:
 
 ## Getting started
 
